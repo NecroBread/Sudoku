@@ -1,5 +1,3 @@
-// New Game Button events
-const newGameBtnEl = document.getElementById('new-game-btn');
 // library with sudoku game setups based on difficulty
 const difficultyLibrary = {
     'easy-dif': {
@@ -103,6 +101,8 @@ const difficultyLibrary = {
 
     },
 }
+// New Game Button events
+const newGameBtnEl = document.getElementById('new-game-btn');
 newGameBtnEl.addEventListener('click', () => {
     const inputCells = document.querySelectorAll('.sudoku-number');
     // reset all cell inputs
@@ -110,7 +110,7 @@ newGameBtnEl.addEventListener('click', () => {
         x.value = ''
         x.disabled = false;
     });
-    
+
     const selectedDifficulty = document.querySelector('.form-check input[type="radio"]:checked').id;
 
     // execute function for new game
@@ -143,6 +143,18 @@ sudokuTable.addEventListener('change', (e) => {
     if (current.className === 'sudoku-number') {
         if (numPattern.test(current.value) === false) {
             current.value = '';
+        }
+    }
+})
+
+// click event on input cells - selects the full input in the cell on click
+sudokuTable.addEventListener('click', (e) => {
+    // use delegation for event and check if input cell is the target
+    const current = e.target;
+    if (current.className === 'sudoku-number') {
+        getFocus(current)
+        function getFocus(targ) {
+            targ.select();
         }
     }
 })
