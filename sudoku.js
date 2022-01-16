@@ -103,7 +103,9 @@ const difficultyLibrary = {
 }
 // New Game Button events
 const newGameBtnEl = document.getElementById('new-game-btn');
-newGameBtnEl.addEventListener('click', () => {
+newGameBtnEl.addEventListener('click', startGame)
+
+function startGame() {
     const inputCells = document.querySelectorAll('.sudoku-number');
     // reset all cell inputs
     inputCells.forEach(x => {
@@ -118,10 +120,11 @@ newGameBtnEl.addEventListener('click', () => {
         inputCells[key].value = difficultyLibrary[selectedDifficulty][key];
         inputCells[key].disabled = true;
     }
-})
+}
 
 // keep hint numbers disabled in the input field after refresh
 window.onload = () => {
+    startGame()
     const inputCells = document.querySelectorAll('.sudoku-number');
     const selectedDifficulty = document.querySelector('.form-check input[type="radio"]:checked').id;
     for (let key of Object.keys(difficultyLibrary[selectedDifficulty])) {
@@ -160,7 +163,7 @@ sudokuTable.addEventListener('click', (e) => {
 })
 
 // add event that checks the sudoku 
-sudokuTable.addEventListener('change', (e) => {
+sudokuTable.addEventListener('input', (e) => {
     // make matrix of sudoku numbers
     const sudokuRowsEl = document.querySelectorAll('.sudokuSqrs tr');
     const sudokuMatrixInput = [];

@@ -40,3 +40,7 @@ table {
     text-align: center;
     font-size: 4ch;
 }
+
+.sudoku-number:disabled {
+    background-color: rgb(243, 243, 243);
+}
